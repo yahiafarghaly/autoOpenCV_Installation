@@ -15,6 +15,3 @@ it does all the job required to set the latest opencv (from official repo)  + ex
 # if you have already the opencv official repo  +  opencv_contrib repo 
 ./setopenCV <pathToOpenCVDirectory>
 
-# TODO
-1- add the support of python.
-2- change the cmake parameters according to your needs.
