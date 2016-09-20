@@ -5,7 +5,7 @@ it does all the job required to set the latest opencv (from official repo)  + ex
 
 # what does it do ?
 1- Download opencv official repo + opencv_contrib repo in a directory called "opencv_latest"
-2- make the installation of opencv using c++ on your machine.
+2- make the installation of opencv using c++/python on your machine.
 3- if CUDA exists , it will add the libary support for CUDA in opencv.
 4- create a simple alias to be able to compile your opencv code without the need of defining the includes/libs paths.
 
@@ -16,5 +16,4 @@ it does all the job required to set the latest opencv (from official repo)  + ex
 ./setopenCV <pathToOpenCVDirectory>
 
 # TODO
-1- add the support of python.
-2- change the cmake parameters according to your needs.
+Change the cmake parameters according to your needs.
