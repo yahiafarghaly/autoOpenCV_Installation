@@ -13,7 +13,9 @@ it does all the job required to set the latest opencv (from official repo)  + ex
 ./setopenCV.sh git
 
 # if you have already the opencv official repo  +  opencv_contrib repo 
-./setopenCV <pathToOpenCVDirectory>
+(I assume you put this script beside the opencv_latest directory.)
+./setopenCV opencv_latest/opencv
+
 
 # TODO
 Change the cmake parameters according to your needs.
