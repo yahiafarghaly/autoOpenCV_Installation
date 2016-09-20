@@ -50,26 +50,38 @@ else
 	            echo "Go inside opencv/build directory "
 	            mkdir build
 	            cd build
+	            FIRST_TIME=1
 	    else
 	    		echo "build directory exists"
 	    		cd build
+	    		FIRST_TIME=0
 	    fi
 fi
 
 
-cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules -D WITH_OPENGL=ON -D WITH_CUDA=ON -D ENABLE_FAST_MATH=1 -D CUDA_FAST_MATH=1 -D WITH_CUBLAS=1 ..
+cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules -D WITH_OPENGL=ON \
+	  -D WITH_CUDA=ON -D ENABLE_FAST_MATH=1 -D CUDA_FAST_MATH=1 -D WITH_CUBLAS=1 \
+	  -D INSTALL_C_EXAMPLES=ON \
+	  -D INSTALL_PYTHON_EXAMPLES=ON \
+	  -D BUILD_EXAMPLES=ON \
+	  -D BUILD_NEW_PYTHON_SUPPORT=ON \
+	  ..
+
 make -j7 # runs 7 jobs in parallel
 sudo make install
 sudo ldconfig -v
 
-echo "Creating the compile_opencv.sh script"
-touch ~/.compile_opencv.sh
-echo "#!/bin/bash" > ~/.compile_opencv.sh
-echo "echo" '"compiling $1"' >> ~/.compile_opencv.sh
-echo "g++  -ggdb" '"$1"' "`pkg-config --cflags opencv` -o " '"$2"' " `pkg-config --libs opencv` " >> ~/.compile_opencv.sh
-echo "echo" '"Output file => ${1%.*}"' >> ~/.compile_opencv.sh
-echo "alias opencv="'"~/.compile_opencv.sh"' >> ~/.bashrc
-
+if [$FIRST_TIME = 0]; then
+	echo "Creating the compile_opencv.sh script"
+	touch ~/.compile_opencv.sh
+	echo "#!/bin/bash" > ~/.compile_opencv.sh
+	echo "echo" '"compiling $1"' >> ~/.compile_opencv.sh
+	echo "g++  -ggdb" '"$1"' "`pkg-config --cflags opencv` -o " '"$2"' " `pkg-config --libs opencv` " >> ~/.compile_opencv.sh
+	echo "echo" '"Output file => ${1%.*}"' >> ~/.compile_opencv.sh
+	echo "alias opencv="'"~/.compile_opencv.sh"' >> ~/.bashrc
+else
+	echo "Not The First Time to run"
+fi
 echo "OK ,every thing is done"
 
 echo "To compile an opencv c++ file"
