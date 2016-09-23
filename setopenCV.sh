@@ -71,7 +71,7 @@ make -j7 # runs 7 jobs in parallel
 sudo make install
 sudo ldconfig -v
 
-if [$FIRST_TIME = 0]; then
+if [$FIRST_TIME = 1]; then
 	echo "Creating the compile_opencv.sh script"
 	touch ~/.compile_opencv.sh
 	echo "#!/bin/bash" > ~/.compile_opencv.sh
